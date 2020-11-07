@@ -1,34 +1,28 @@
-//import React, { useState, useEffect } from 'react'
-import { Server } from "miragejs";
-import { sales, subscriptions } from '../../mocks';
+import React, { useState, useEffect } from 'react'
+import PropTypes from "prop-types"
 
-new Server({
-  routes() {
-    this.namespace = "api";
+function Fetching({ endpoint }) {
+  const [data, setData] = useState([]);
 
-    this.get("/subscriptions/", () => {
-      return subscriptions;
-    });
-    this.get("/sales/", () => {
-      return sales;
-    })
-  }
-});
-
-async function Fetching(props) {
-  let result = [];
-  await fetch(`${props}`)
-    .then(response => {
-      if (!response.ok) throw Error(response.statusText);
-      return response.json()
-    })
-    .then(data => {
-      result = data
-    })
+  useEffect(() => {
+    fetch(endpoint)
+      .then(response => response.json())
+      .then(json => setData(json));
+  }, [endpoint]);
 
   return (
-    result
-  )
+    <ul>
+      {data.map(element => (
+        <li key={element.timestamp}>
+          {element.timestamp} - {element.amount}
+        </li>
+      ))}
+    </ul>
+  );
 }
+
+Fetching.propTypes = {
+  endpoint: PropTypes.string.isRequired
+};
 
 export default Fetching

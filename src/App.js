@@ -1,14 +1,10 @@
 import React from "react";
 import Container from "./common/components/Container";
-import DashboardShell from "./features/Dashboard/DashboardShell";
+//import DashboardShell from "./features/Dashboard/DashboardShell";
 
 const App = () => {
-  return (
-    <div>
-      <DashboardShell />
-      <Container />
-    </div>
-  )
+  // return <DashboardShell />
+  return <Container />
 };
 
 export default App;
