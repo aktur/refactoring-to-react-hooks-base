@@ -7,6 +7,7 @@ import { sales, subscriptions } from '../../mocks';
 new Server({
   routes() {
     this.namespace = "api";
+    //this.timing = 3000
 
     this.get("/subscriptions/", () => {
       return subscriptions;
