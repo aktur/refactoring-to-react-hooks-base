@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from "prop-types"
 import Loading from './Loading'
-import useDataFetching from './customhooks/useDataFetching'
+import useDataFetching from '../customhooks/useDataFetching'
 
 function Fetching({ endpoint }) {
   const { loading, error, data } = useDataFetching(endpoint)
