@@ -23,18 +23,19 @@ new Server({
 const initialContext = {
   loading: false,
   error: "",
-  salesTotal: 0,
-  subscriptionsTotal: 0,
+  salesTotal: 12,
+  subscriptionsTotal: 34,
   data: [{ timestamp: new Date().toISOString(), amount: 0 }]
 };
 
-export const AppContext = React.createContext(initialContext)
+export const appContext = React.createContext()
+const { Provider } = appContext
 
 const App = () => {
   return (
-    <AppContext.Provider value={initialContext}>
-      <DashboardShell fetchDataset={()=>{}}/>
-    </AppContext.Provider>)
+    <Provider value={initialContext}>
+      <DashboardShell />
+    </Provider>)
 };
 
 export default App;

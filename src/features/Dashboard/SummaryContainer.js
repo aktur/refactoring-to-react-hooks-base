@@ -1,18 +1,18 @@
 import React, { useContext } from "react";
-import { AppContext } from "../../App";
+import { appContext } from "../../App";
 
 const SummaryContainer = () => {
-  const context = useContext(AppContext)
+  const { salesTotal, subscriptionsTotal } = useContext(appContext)
 
   return (
     <div className="summary flex flex-row">
       <div className="card bg-indigo">
         <p>CellFast sales</p>
-        <p>$ {context.salesTotal}</p>
+        <p>$ {salesTotal}</p>
       </div>
       <div className="card bg-blue">
         <p>CellNow subscriptions</p>
-        <p>$ {context.subscriptionsTotal}</p>
+        <p>$ {subscriptionsTotal}</p>
       </div>
     </div>
   );

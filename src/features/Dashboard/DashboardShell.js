@@ -1,51 +1,13 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import Aside from "../../common/components/Aside";
 import ChartContainer from "./ChartContainer";
 import Layout from "../../common/components/Layout";
 import Main from "../../common/components/Main";
 import SummaryContainer from "./SummaryContainer";
-import { fetchDataset } from "./DashboardSlice";
 import Select from "../../common/components/Select";
 
-function BuildSelect({ handleChange }) {
-
-  const optionsForSelect = [
-    { label: "Sales", value: `${process.env.REACT_APP_BASE_URL}/sales/` },
-    {
-      label: "Subscriptions",
-      value: `${process.env.REACT_APP_BASE_URL}/subscriptions/`
-    }
-  ];
-
-  return (
-    <>
-      <div className="field">
-        <Select
-          handleChange={handleChange}
-          label="Please, select a chart"
-          id="select-chart"
-          options={optionsForSelect}
-        />
-        <div className="chevron-wrapper flex">
-          <svg
-            className="chevron"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-          >
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-          </svg>
-        </div>
-      </div>
-    </>
-  );
-}
-
-function DashboardShell() {
+const DashboardShell = () => {
   const [selectedLabel, setSelectedLabel] = useState("");
-
-  function handleSelectChange(event) {
-    setSelectedLabel(event.target.selectedOptions[0].label);
-  }
 
   // constructor(props) {
   //   super(props);
@@ -59,18 +21,32 @@ function DashboardShell() {
   //   this.props.fetchDataset(`${process.env.REACT_APP_BASE_URL}/totals/`);
   // }
 
-  // handleSelectChange(event) {
-  //   // TODO
-  //   const selectedLabel = event.target.selectedOptions[0].label;
-  //   this.props.fetchDataset(event.target.value);
-  //   this.setState({ selectedLabel });
-  // }
+  function handleSelectChange(event) {
+    setSelectedLabel(event.target.selectedOptions[0].label);
+    //   // TODO
+    //   const selectedLabel = event.target.selectedOptions[0].label;
+    //   this.props.fetchDataset(event.target.value);
+    //   this.setState({ selectedLabel });
+  }
+
+  const optionsForSelect = [
+    { label: "Sales", value: `${process.env.REACT_APP_BASE_URL}/sales/` },
+    {
+      label: "Subscriptions",
+      value: `${process.env.REACT_APP_BASE_URL}/subscriptions/`
+    }
+  ];
 
   return (
     <Layout>
       <Aside>
         <h2># Polly dashboard</h2>
-        <BuildSelect handleChange={handleSelectChange} />
+        <Select
+          label="Please, select a chart"
+          handleChange={handleSelectChange}
+          id="select-chart"
+          options={optionsForSelect}
+        />
       </Aside>
       <Main>
         <h1>
@@ -82,9 +58,5 @@ function DashboardShell() {
     </Layout>
   );
 }
-
-const mapDispatchToProps = {
-  fetchDataset
-};
 
 export default (DashboardShell);
